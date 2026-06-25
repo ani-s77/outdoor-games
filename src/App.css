@@ -12,9 +12,11 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh;
   background:
     radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.7), transparent 24%),
     linear-gradient(180deg, #c6ebff 0 28%, #d9f1c9 28% 100%);
+  overflow: hidden;
 }
 
 button {
@@ -23,6 +25,7 @@ button {
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   padding: 12px;
@@ -31,6 +34,7 @@ button {
 .screen {
   width: min(100%, 430px);
   height: calc(100vh - 24px);
+  height: calc(100dvh - 24px);
   max-height: 820px;
   background: rgba(255, 253, 232, 0.92);
   border: 4px solid #355f2d;
@@ -570,13 +574,22 @@ h1 {
 }
 
 @media (max-width: 420px) {
+  body,
   #root {
-    padding: 0;
+    min-height: 100svh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  #root {
+    padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 78px);
+    align-items: flex-start;
   }
 
   .screen {
     width: 100%;
-    height: 100vh;
+    height: calc(100svh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 78px);
+    height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 78px);
     max-height: none;
     border-width: 0;
     border-radius: 0;
@@ -606,11 +619,141 @@ h1 {
   }
 
   .game-screen {
-    gap: 10px;
+    gap: 6px;
+    padding: 8px 10px 10px;
+  }
+
+  .hud,
+  .status-strip {
+    font-size: 0.84rem;
+  }
+
+  .host-area {
+    gap: 7px;
+  }
+
+  .host-avatar {
+    width: 38px;
+    height: 38px;
+    border-width: 2px;
+  }
+
+  .speech-bubble {
+    min-height: 52px;
+    border-width: 2px;
+    border-radius: 16px;
+    padding: 7px 10px;
+  }
+
+  .speech-bubble strong {
+    font-size: 1.22rem;
+  }
+
+  .timer-shell {
+    height: 12px;
+  }
+
+  .lanes {
+    gap: 6px;
+  }
+
+  .lane {
+    border-width: 2px;
+    border-radius: 14px;
+  }
+
+  .lane-label {
+    padding-block: 5px;
+    font-size: 0.72rem;
+  }
+
+  .lane-track {
+    gap: 4px;
+    padding: 5px 4px;
+    background-size: 22px 22px;
+  }
+
+  .player-chip {
+    border-width: 2px;
+    border-radius: 11px;
+    gap: 2px;
+    padding: 3px 2px;
+    font-size: 0.58rem;
+  }
+
+  .player-chip .avatar {
+    width: 25px;
+    height: 25px;
+  }
+
+  .out-section {
+    min-height: 35px;
+    border-radius: 12px;
+    padding: 5px 6px;
+    font-size: 0.75rem;
+  }
+
+  .out-section > div {
+    margin-top: 3px;
+  }
+
+  .controls {
+    gap: 7px;
   }
 
   .controls button {
-    min-height: 48px;
+    min-height: 42px;
     font-size: 0.78rem;
+    border-radius: 14px;
+  }
+
+  .control-symbol {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 380px), (max-height: 720px) {
+  .game-screen {
+    gap: 5px;
+    padding: 7px 9px 9px;
+  }
+
+  .speech-bubble {
+    min-height: 48px;
+  }
+
+  .speech-bubble strong {
+    font-size: 1.12rem;
+  }
+
+  .status-strip {
+    font-size: 0.78rem;
+  }
+
+  .lane-label {
+    font-size: 0.68rem;
+  }
+
+  .player-chip {
+    padding: 2px;
+    font-size: 0.53rem;
+  }
+
+  .player-chip .avatar {
+    width: 22px;
+    height: 22px;
+  }
+
+  .out-section {
+    min-height: 31px;
+    font-size: 0.7rem;
+  }
+
+  .controls button {
+    min-height: 38px;
+  }
+
+  .controls button span:last-child {
+    font-size: 0.66rem;
   }
 }

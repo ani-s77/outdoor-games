@@ -150,6 +150,18 @@ const getCommandsReachableForPlayers = (players, doubleJumpsActive = false) =>
     players.every((player) => isCommandReachable(player.lane, command, doubleJumpsActive))
   );
 
+const getDoubleJumpCommandForLane = (lane) => {
+  if (lane === 0) {
+    return 'Trump';
+  }
+
+  if (lane === 2) {
+    return 'Joe Biden';
+  }
+
+  return null;
+};
+
 const chooseWrongNpcMove = (lane, correctLane, doubleJumpsActive = false) => {
   const candidateLanes = doubleJumpsActive ? [lane - 2, lane - 1, lane, lane + 1, lane + 2] : [lane - 1, lane, lane + 1];
   const validWrongLanes = candidateLanes.filter(
@@ -241,6 +253,20 @@ export const chooseRoundCommand = ({
         trapType: 'pattern',
         trapProgress: nextIndex / patternState.pattern.length,
         patternState: { ...patternState, index: nextIndex }
+      },
+      alive,
+      userLane,
+      doubleJumpsActive
+    );
+  }
+
+  const doubleJumpCommand = doubleJumpsActive ? getDoubleJumpCommandForLane(userLane) : null;
+  if (doubleJumpCommand && Math.random() < 0.32) {
+    return makeChoiceReachable(
+      {
+        command: doubleJumpCommand,
+        trapType: 'normal',
+        patternState: null
       },
       alive,
       userLane,
