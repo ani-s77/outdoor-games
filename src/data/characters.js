@@ -9,8 +9,8 @@ export const CHARACTERS = [
     avatarImage: assetUrl("muzamil-avatar.png"),
     reactionTime: 2.5,
     minReactionTime: 1,
-    npcFailChance: 0.01,
-    trapPenalty: 0.03,
+    npcFailChance: 0.012,
+    trapPenalty: 0.035,
     winnerLine: "Mustafa winner!"
   },
   {
@@ -22,7 +22,7 @@ export const CHARACTERS = [
     reactionTime: 2.5,
     minReactionTime: 1.2,
     npcFailChance: 0.008,
-    trapPenalty: 0.03,
+    trapPenalty: 0.025,
     special: "cheating-risk",
     winnerLine: "Mr Griddy winner!"
   },
@@ -46,8 +46,8 @@ export const CHARACTERS = [
     avatarImage: assetUrl("hasnan-avatar.png"),
     reactionTime: [1.7, 2.1],
     minReactionTime: 1,
-    npcFailChance: 0.035,
-    trapPenalty: 0.08,
+    npcFailChance: 0.04,
+    trapPenalty: 0.085,
     winnerLine: "After very long, Hamza winner!"
   },
   {
@@ -58,8 +58,8 @@ export const CHARACTERS = [
     avatarImage: assetUrl("cool-boy-avatar.png"),
     reactionTime: [1.9, 2.2],
     minReactionTime: 1,
-    npcFailChance: 0.025,
-    trapPenalty: 0.07,
+    npcFailChance: 0.022,
+    trapPenalty: 0.055,
     winnerLine: "Chill Guy the new champion!"
   },
   {
@@ -70,8 +70,8 @@ export const CHARACTERS = [
     avatarImage: assetUrl("omar-avatar.png"),
     reactionTime: [1.8, 2],
     minReactionTime: 1,
-    npcFailChance: 0.04,
-    trapPenalty: 0.09,
+    npcFailChance: 0.05,
+    trapPenalty: 0.1,
     winnerLine: "Owais the new champion!"
   },
   {
@@ -82,8 +82,8 @@ export const CHARACTERS = [
     avatarImage: assetUrl("biggie-avatar.png"),
     reactionTime: 1.8,
     minReactionTime: 1,
-    npcFailChance: 0.02,
-    trapPenalty: 0.06,
+    npcFailChance: 0.03,
+    trapPenalty: 0.07,
     winnerLine: "Ricky winner!"
   },
   {
