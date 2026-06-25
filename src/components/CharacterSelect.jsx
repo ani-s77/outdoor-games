@@ -1,12 +1,15 @@
 import { CHARACTERS } from '../data/characters.js';
 import Avatar from './Avatar.jsx';
 
-function CharacterSelect({ onSelect }) {
+function CharacterSelect({ game, onBack, onSelect }) {
   return (
     <section className="screen character-select">
-      <div className="screen-header">
-        <p className="eyebrow">Choose your challenger</p>
-        <h1>Backyard Jumping Challenge</h1>
+      <div className="screen-header character-select-header">
+        <button className="back-button" type="button" onClick={onBack} aria-label="Back to games">
+          ←
+        </button>
+        <p className="eyebrow">{game?.eyebrow || 'Choose your challenger'}</p>
+        <h1>{game?.title || 'Backyard Jumping Challenge'}</h1>
       </div>
 
       <div className="character-grid">

@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import CharacterSelect from './components/CharacterSelect.jsx';
 import DoubleJumpScreen from './components/DoubleJumpScreen.jsx';
+import GameSelect from './components/GameSelect.jsx';
 import GameScreen from './components/GameScreen.jsx';
 import WinnerScreen from './components/WinnerScreen.jsx';
+import { getGameById } from './data/games.js';
 import {
   addCheatingWarning,
   applyUserMove,
@@ -20,7 +22,8 @@ const CHEATING_WARNING_DELAY = 1000;
 const NEXT_ROUND_DELAY = 400;
 
 function App() {
-  const [screen, setScreen] = useState('start');
+  const [screen, setScreen] = useState('game-select');
+  const [selectedGameId, setSelectedGameId] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
   const [players, setPlayers] = useState([]);
   const [roundNumber, setRoundNumber] = useState(0);
@@ -99,6 +102,7 @@ function App() {
     () => players.find((player) => player.id === selectedId),
     [players, selectedId]
   );
+  const selectedGame = useMemo(() => getGameById(selectedGameId), [selectedGameId]);
 
   const clearTimers = useCallback(() => {
     timersRef.current.forEach((timerId) => window.clearTimeout(timerId));
@@ -341,6 +345,12 @@ function App() {
     }, 100);
   };
 
+  const selectGame = (gameId) => {
+    clearTimers();
+    setSelectedGameId(gameId);
+    setScreen('character-select');
+  };
+
   const handleMove = (direction) => {
     if (!awaitingRef.current) {
       return;
@@ -393,7 +403,8 @@ function App() {
     trapTypeRef.current = 'normal';
     trapProgressRef.current = 0;
     doubleJumpsActiveRef.current = false;
-    setScreen('start');
+    setScreen('game-select');
+    setSelectedGameId(null);
     setSelectedId(null);
     setPlayers([]);
     setRoundNumber(0);
@@ -416,6 +427,13 @@ function App() {
     queueTimer(() => {
       startRound(true);
     }, 100);
+  };
+
+  const backToGames = () => {
+    clearTimers();
+    setSelectedGameId(null);
+    setSelectedId(null);
+    setScreen('game-select');
   };
 
   if (screen === 'winner') {
@@ -450,7 +468,11 @@ function App() {
     );
   }
 
-  return <CharacterSelect onSelect={beginGame} />;
+  if (screen === 'character-select' && selectedGame) {
+    return <CharacterSelect game={selectedGame} onBack={backToGames} onSelect={beginGame} />;
+  }
+
+  return <GameSelect onSelect={selectGame} />;
 }
 
 export default App;
