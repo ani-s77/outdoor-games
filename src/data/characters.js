@@ -1,4 +1,5 @@
-const assetUrl = (fileName) => import.meta.env.BASE_URL + "assets/" + fileName;
+const AVATAR_ASSET_VERSION = "2026-06-25-avatar-swap";
+const assetUrl = (fileName) => `${import.meta.env.BASE_URL}assets/${fileName}?v=${AVATAR_ASSET_VERSION}`;
 
 export const CHARACTERS = [
   {
